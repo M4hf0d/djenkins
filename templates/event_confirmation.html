@@ -1,0 +1,9 @@
+{% extends "base.html"%} {% block title %} ✅ Confirm {% endblock title %} {% block body %}
+<form method="POST"
+    style="display: flex; justify-content: space-around; flex-direction: column;align-items: center; padding-top: 10%;">
+    {% csrf_token %}
+    <input type="submit" value="confirm" class="btn btn--primary formsubmit-btn">
+    <a href="{% url 'event_page' pk=event.id %}" class="form-field--wrapper"> Back </a>
+
+</form>
+{% endblock body %}

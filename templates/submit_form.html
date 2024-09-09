@@ -1,0 +1,13 @@
+{% extends "base.html"%} {% block title %} ✅ Project submission {{event.name}} {% endblock title %} <a href=""></a>
+ {% block body %}
+  <h1> Project Submission for <b> {{event.name}}</b></h1>
+  
+
+  <div>
+        <form method ="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value ="Submit">
+        </form>
+  </div>
+{% endblock body %}

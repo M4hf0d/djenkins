@@ -1,0 +1,33 @@
+{% extends "base.html"%} {% block title %} 🗓️ {{event.name}} {% endblock title %} {% block body %}
+<h1>{{event.name}}</h1>
+<p>{{event.description|linebreaks}}</p>
+
+
+<div>
+    <h3>
+
+
+        Participants
+    </h3>
+    <ul>
+        {% for p in event.participants.all %}
+
+        <li><strong> {{p.name}} </strong></li>
+        {% endfor %}
+
+    </ul>
+</div>
+
+
+{% if registered %}
+<h4> You are registered ✅</h4>
+<p>(important) Participants are allowed one submission</p>
+
+
+{% if submitted %}
+<button style="cursor: not-allowed;" class="btn btn--primary ">You already submitted</button>
+<a href="{% url 'pesubmission' pk=sub.id %}" class="btn btn--primary ">Edit Submission</a> {% else %}
+<a href="{% url 'psubmission' pk=event.id %}" class="btn btn--primary "> Submit Project</a> {% endif %}
+{%else %}
+<a href="{% url 'registration_confirmaton' pk=event.id %}" class="btn btn--primary ">Register </a> {% endif %}
+{%endblock body %}

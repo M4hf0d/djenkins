@@ -1,0 +1,60 @@
+{% extends "base.html"%} {% block title %} 👤 Account {% endblock title %}
+<a href=""></a>
+{% block body %}
+{% comment %} <h1> Hello {{user.name}} ! </h1>
+
+
+<h2> My Events :</h2>
+{% for event in user.events.all %}
+<div>
+    <a href="{% url 'event_page' pk=event.id %}">{{event.name}}</a>
+
+</div>
+{% endfor %}
+
+<h2> My submissions:</h2>
+{% for sub in user.submission.all %}
+<div>
+    <a href="{% url 'event_page' pk=sub.event.id %}">{{sub.event.name}}</a>
+    <a href="{% url 'pesubmission' pk=sub.id %}">Edit Submission</a>
+
+</div>
+{% endfor %} {% endcomment %}
+<div class="section">
+        <img class="user--avatar--lg" src="{{user.avatar.url}}"/>
+    </div>
+
+    <div id="account--buttons">
+        {% comment %} <a class="btn btn--secondary" href="{% url 'edit-account' %}">Edit</a>
+        <a class="btn btn--secondary" href="{% url 'change-password' %}">Reset password</a> {% endcomment %}
+        <a class="btn btn--primary" href="{% url 'profile' user.id %}">View Profile</a>
+    </div>
+
+
+
+    <div class="section">
+        <h3>My Events</h3>
+        <ul>
+{% for event in user.events.all %}
+<li> <a href="{% url 'event_page' pk=event.id %}">{{event.name}}</a></li>
+
+        {% empty %}
+            <p>You haven't registed for any events</p>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>My Submissions</h3>
+        <ul>
+{% for sub in user.submission.all %}
+   <li> <a href="{% url 'event_page' pk=sub.event.id %}">{{sub.event.name}} .............................................</a>
+        <a href="{% url 'pesubmission' pk=sub.id %}">Edit Submission</a></li>
+
+        
+            {% empty %}
+            <p>You dont haven't submitted any projects yet</p>
+        {% endfor %}
+        </ul>
+    </div>
+ {% endblock body %}
